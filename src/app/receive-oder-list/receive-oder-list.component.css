@@ -1,0 +1,59 @@
+
+body{
+  background-color: #c87ea1;
+  background-image: linear-gradient(0deg, #c87ea1 0%, #c0434d 100%);
+   
+}
+
+.t1{
+
+width: 50%;
+
+}
+
+@media (min-width: 400px) {
+
+  .t1{
+
+    width: 80%;
+    
+    }
+    
+ }
+
+
+@media (min-width: 576px) {
+
+  .t1{
+
+    width: 80%;
+    
+    }
+    
+ }
+
+@media (min-width: 768px) {
+
+  .t1{
+
+    width: 50%;
+    
+    }
+    
+ }
+
+
+@media (min-width: 992px) {
+
+
+ }
+
+@media (min-width: 1200px) { 
+
+
+}
+@media (min-width: 1400px) { 
+
+
+
+}
