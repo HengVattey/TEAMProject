@@ -1,0 +1,132 @@
+<div class="order-container">
+  <h2><b>Order Management</b></h2>
+
+  <!-- Tabs for switching between stages with total counts -->
+  <div class="tabs">
+    <button (click)="setActiveTab('received')">
+      Received Orders ({{ receivedOrders.length }})
+    </button>
+    <button (click)="setActiveTab('preparing')">
+      Preparing Orders ({{ preparingOrders.length }})
+    </button>
+    <button (click)="setActiveTab('readyToPickup')">
+      Ready to Pickup Orders ({{ readyToPickupOrders.length }})
+    </button>
+  </div>
+
+  <!-- Received Orders Table -->
+  <div *ngIf="activeTab === 'received'">
+    <h3>Received Orders</h3>
+    <table class="order-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Order No</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let order of receivedOrders | slice : 0 : itemsToShow.received;
+            index as i
+          "
+        >
+          <td class="col-2">{{ i + 1 }}</td>
+          <td class="col-3 fs-5">
+            <strong>{{ order }}</strong>
+          </td>
+          <td class="col-5">
+            <button class="view">View Items</button>
+            <button (click)="moveToPreparing(order)">Next to Preparing</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button
+      class="show"
+      *ngIf="receivedOrders.length > itemsToShow.received"
+      (click)="loadMore()"
+    >
+      {{ showAllItems.received ? "Show Less" : "Show More" }}
+    </button>
+  </div>
+
+  <!-- Preparing Orders Table -->
+  <div *ngIf="activeTab === 'preparing'">
+    <h3>Preparing Orders</h3>
+    <table class="order-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Order No</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let order of preparingOrders | slice : 0 : itemsToShow.preparing;
+            index as i
+          "
+        >
+          <td>{{ i + 1 }}</td>
+          <td>{{ order }}</td>
+          <td>
+            <button (click)="moveToReceived(order)">Back to Received</button>
+            <button (click)="moveToReadyToPickup(order)">
+              Ready to Pickup
+            </button>
+            <button class="view">View Items</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button
+      class="show"
+      *ngIf="preparingOrders.length > itemsToShow.preparing"
+      (click)="loadMore()"
+    >
+      {{ showAllItems.preparing ? "Show Less" : "Show More" }}
+    </button>
+  </div>
+
+  <!-- Ready to Pickup Orders Table -->
+  <div *ngIf="activeTab === 'readyToPickup'">
+    <h3>Ready to Pickup Orders</h3>
+    <table class="order-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Order No</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let order of readyToPickupOrders
+              | slice : 0 : itemsToShow.readyToPickup;
+            index as i
+          "
+        >
+          <td>{{ i + 1 }}</td>
+          <td>{{ order }}</td>
+          <td>
+            <button (click)="moveToPreparingFromReady(order)">
+              Back to Preparing
+            </button>
+            <button class="view">View Items</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button
+      class="show"
+      *ngIf="readyToPickupOrders.length > itemsToShow.readyToPickup"
+      (click)="loadMore()"
+    >
+      {{ showAllItems.readyToPickup ? "Show Less" : "Show More" }}
+    </button>
+  </div>
+</div>
