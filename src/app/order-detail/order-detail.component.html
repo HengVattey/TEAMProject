@@ -1,1 +1,39 @@
-<p>order-detail works!</p>
+<div class="order-details">
+  <h2>Order Detail</h2>
+  <div class="order-info">
+    <p><strong>Order No:</strong> {{ order.orderNo }}</p>
+    <p><strong>Name:</strong> {{ order.name }}</p>
+    <p><strong>Email:</strong> {{ order.email }}</p>
+    <p><strong>Phone:</strong> {{ order.phone }}</p>
+    <p><strong>Customer Address:</strong> {{ order.customerAddress }}</p>
+    <p><strong>Order Date:</strong> {{ order.orderDate }}</p>
+    <p><strong>Pickup Time:</strong> {{ order.pickupTime }}</p>
+  </div>
+
+  <table class="order-table">
+    <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>SKU</th>
+        <th>Location</th>
+        <th>Quantity</th>
+        <th>Price Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of order.items">
+        <td>{{ item.name }}</td>
+        <td>{{ item.sku }}</td>
+        <td>{{ item.location }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.priceTotal | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="summary">
+    <p><strong>Subtotal:</strong> {{ order.subtotal | currency }}</p>
+    <p><strong>Tax:</strong> {{ order.tax | currency }}</p>
+    <p><strong>Total:</strong> {{ order.total | currency }}</p>
+  </div>
+</div>
