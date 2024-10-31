@@ -3,27 +3,21 @@ import { RouterOutlet } from '@angular/router';
 import { ReceiveOderListComponent } from './receive-oder-list/receive-oder-list.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { REjectOrderComponent } from './reject-order/reject-order.component';
-<<<<<<< HEAD
 import { ReturnComponent } from './return/return.component';
-=======
 import { ReceiveOrderListComponent } from './receive-order-list/receive-order-list.component';
->>>>>>> 5a2de9699993625534c9d309661a579c2553c124
+import { PickupComponentComponent } from "./pickup-component/pickup-component.component";
+import { ReturnOrderListComponent } from "./return-order-list/return-order-list.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-<<<<<<< HEAD
-  imports: [RouterOutlet, ReceiveOderListComponent, OrderDetailComponent,REjectOrderComponent
-    ,ReturnComponent
-=======
-  imports: [
+  imports: [RouterOutlet, ReceiveOderListComponent, OrderDetailComponent, REjectOrderComponent,
+    ReturnComponent,
     RouterOutlet,
     ReceiveOderListComponent,
     OrderDetailComponent,
     REjectOrderComponent,
-    ReceiveOrderListComponent,
->>>>>>> 5a2de9699993625534c9d309661a579c2553c124
-  ],
+    ReceiveOrderListComponent, PickupComponentComponent, ReturnOrderListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

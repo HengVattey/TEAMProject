@@ -1,98 +1,136 @@
-.return-order-form {
-    font-family: Arial, sans-serif;
-    width: 90%;
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  label {
-    display: block;
-    margin: 8px 0 4px;
-  }
-  
-  input[type="text"],
-  input[type="number"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-  }
-  
-  .item-code {
-    display: flex;
-  }
-  
-  .item-code input {
-    flex: 1;
-  }
-  
-  .item-code button {
-    width: 40px;
-    background-color: #ddd;
-    border: none;
-    cursor: pointer;
-  }
-  
-  table {
-    width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-  
-  .summary {
-    margin-top: 20px;
-    font-size: 1.2em;
-  }
-  
-  /* Responsive Styles */
-  @media (max-width: 600px) {
-    .return-order-form {
-      padding: 10px;
-    }
-  
-    table {
-      font-size: 0.9em;
-    }
-  
-    th, td {
-      padding: 6px;
-    }
-  
-    .summary p {
-      font-size: 1em;
-    }
-  }
-  
-  /* Extra small screen adjustments for mobile */
-  @media (max-width: 400px) {
-    table {
-      display: block;
-      overflow-x: auto;
-    }
-  
-    th, td {
-      display: block;
-      text-align: left;
-    }
-  
-    th {
-      font-weight: bold;
-    }
-  
-    .summary {
-      font-size: 1em;
-    }
-  }
-  /* --------------- */
-  .return-order-form {
-    max-width: 600px;
-    margin: auto;
-  }
+/* Gradient Background for the Entire Form */
+.container.return-order-form {
+  max-width: 700px;
+  margin: auto;
+  background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
+  border-radius: 12px;
+  padding: 20px;
+  color: #333;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+/* Title Styling with Star Accents */
+.container h3 {
+  font-size: 1.8rem;
+  color: #222;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.container h3::before, .container h3::after {
+  content: '✨';
+  font-size: 1.5rem;
+  position: absolute;
+  color: #aaa;
+}
+
+.container h3::before {
+  left: -20px;
+  top: -10px;
+}
+
+.container h3::after {
+  right: -20px;
+  top: -10px;
+}
+
+/* Form Labels and Inputs with Soft Borders */
+.form-label {
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.form-control {
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 0.75rem;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.7);
+  color: #333;
+  transition: box-shadow 0.3s;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+  outline: none;
+}
+
+/* Item Code Input with Button */
+.mb-3.d-flex .form-control {
+  margin-right: 10px;
+}
+
+.btn-outline-secondary {
+  border-color: #fff;
+  color: #333;
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #f0f8fd;
+  color: #333;
+}
+
+/* Table Styling with Transparent Background */
+.table {
+  margin-top: 1rem;
+  color: #444;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table thead {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table th, .table td {
+  padding: 12px;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 500;
+}
+
+.table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Item Image Styling */
+.item-img {
+  width: 85px;
+  height: 85px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Summary Section Styling */
+.summary {
+  font-size: 1rem;
+  color: #333;
+  text-align: right;
+}
+
+.summary p {
+  margin: 0.25rem 0;
+}
+
+.summary strong {
+  font-size: 1.25rem;
+  color: #444;
+}
+
+/* Additional Star Accents */
+.star-accent {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0.25rem;
+}
+
