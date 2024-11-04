@@ -1,4 +1,4 @@
-import { CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component } from '@angular/core';
 
 interface OrderItem {
@@ -22,33 +22,35 @@ interface Order {
   tax: number;
   total: number;
 }
+
 @Component({
   selector: 'app-order-detail',
   standalone: true,
-  imports: [CurrencyPipe],
+  imports: [CommonModule, CurrencyPipe],
   templateUrl: './order-detail.component.html',
-  styleUrl: './order-detail.component.css',
+  styleUrls: ['./order-detail.component.css'],
 })
 export class OrderDetailComponent {
   order: Order = {
-    orderNo: 1406,
-    name: 'Ana Nancy',
-    email: 'nancy@gmail.com',
-    phone: '2564789456',
-    customerAddress: '1256 NW 20TH ST Gainesville, FL 34562',
-    orderDate: '08/23/2024',
-    pickupTime: '08/23/2024 08:00 PM',
+    orderNo: 3338,
+    name: 'LivAn Chreom',
+    email: 'Livan@gmail.com',
+    phone: '0978024082',
+    customerAddress: '33, Theuk tha, Sea Sok, PP',
+    orderDate: '02/01/2026',
+    pickupTime: '02/10/2026 08:00 AM',
     items: [
       {
-        name: 'Smooth Lather',
+        name: 'Mustang',
         sku: '456234',
-        location: 'Shop 34 Floor GA USA',
-        quantity: 10,
-        priceTotal: 450,
+        location: '444, #93 Preah Monivong Blvd (93), Phnom Penh',
+        quantity: 1,
+        priceTotal: 20000,
       },
+      // Add more items as needed
     ],
-    subtotal: 450,
-    tax: 45,
-    total: 495,
+    subtotal: 20000,
+    tax: 30,
+    total: 20030,
   };
 }
