@@ -1,26 +1,26 @@
-/* General Layout for Shop Order Management */
 .order-manager {
   width: 100%;
-  background-color: #f5f5f5; /* Soft gray background */
+  max-width: 1200px; /* Limit the width for better readability */
+  background-color: #f0f4f8; /* Light blue background */
   margin: 20px auto;
   border-radius: 20px; /* More pronounced rounding */
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Deeper shadow for a floating effect */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   padding: 30px; /* Increased padding for spaciousness */
 }
 
 /* Header Styles */
 h1 {
-  color: #2c3e50; /* Darker gray color for header */
+  color: #34495e; /* Dark gray color for header */
   text-align: center;
   padding-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 hr {
-  color: #e74c3c; /* Red color for the divider */
+  color: #3498db; /* Blue color for the divider */
   width: 80%;
   font-weight: 600;
-  margin: 20px auto; /* Space around the line */
+  margin: 10px auto; /* Space around the line */
 }
 
 /* Kanban Board Layout */
@@ -28,21 +28,27 @@ hr {
   display: flex;
   justify-content: space-between; /* Space between columns */
   padding: 10px;
+  gap: 30px; /* Gap between columns */
 }
 
 /* Column Styles */
 .kanban-column {
-  width: 400px; /* Wider column for more space */
+  flex: 1; /* Allow columns to grow and fill space */
+  min-width: 300px; /* Minimum width for columns */
+  max-width: 400px; /* Maximum width for columns */
   text-align: center;
+  max-height: max-content;
   border-radius: 10px;
-  transition: transform 0.3s; /* Smooth transition on hover */
   background: #ffffff; /* White background for columns */
   border: 1px solid #dcdcdc; /* Light border for separation */
   padding: 15px;
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
 }
 
 .kanban-column:hover {
-  transform: translateY(-4px); /* Slight lift on hover */
+  transform: translateY(-3px); /* Slight lift on hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1); /* Shadow effect on hover */
+  border: #2980b9 solid 1px;
 }
 
 /* Column Header Styles */
@@ -58,13 +64,14 @@ hr {
   border: 1px solid #3498db; /* Blue border color */
   border-radius: 10px;
   padding: 15px;
+  margin-bottom: 15px; /* Spacing between tasks */
   cursor: pointer;
   position: relative; /* Needed for dropdown positioning */
   transition: box-shadow 0.3s; /* Smooth transition for hover effect */
 }
 
 .task:hover {
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Shadow effect on hover */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow effect on hover */
 }
 
 /* Task Header */
@@ -78,7 +85,9 @@ hr {
   padding: 10px 15px; /* Padding for header */
   border-radius: 6px; /* Rounded corners for header */
 }
-
+.task-header button {
+  border: none;
+}
 /* Task Content */
 .task-content {
   margin-top: 10px;
@@ -155,10 +164,12 @@ hr {
   border-radius: 5px; /* Rounded corners */
   transition: background-color 0.3s; /* Smooth transition */
 }
+
 a {
   text-decoration: none;
   color: #2980b9;
 }
+
 .toggle-button:hover {
   background-color: #ecf0f1; /* Highlight on hover */
 }

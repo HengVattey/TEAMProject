@@ -21,22 +21,22 @@ export class ReceiveOrderListComponent {
   columns = [
     {
       name: 'Receive Order',
-      status: 'Ordered',
-      tasks: this.generateTasks(12, 'Ordered', 'Items'),
+      status: '1401',
+      tasks: this.generateTasks(12, '1401', ''),
       displayCount: 10,
       showingMore: false,
     },
     {
       name: 'Preparing',
-      status: 'Booked',
-      tasks: this.generateTasks(11, 'Booked', 'Items'),
+      status: '1301',
+      tasks: this.generateTasks(11, '1301', 'Sok Chamroeun'),
       displayCount: 10,
       showingMore: false,
     },
     {
-      name: 'Ready to Pickup',
-      status: 'Ready',
-      tasks: this.generateTasks(10, 'Ready', 'Items'),
+      name: 'Ready To Pickup',
+      status: '1201',
+      tasks: this.generateTasks(10, '1201', 'Sok Chamroeun'),
       displayCount: 10,
       showingMore: false,
     },
@@ -45,7 +45,7 @@ export class ReceiveOrderListComponent {
   // Generate sample tasks
   generateTasks(count: number, status: string, ticketName: string): Task[] {
     return Array.from({ length: count }, (_, i) => ({
-      ticketId: `${status.slice(0, 3).toUpperCase()}-${i + 1}`,
+      ticketId: `${status.slice(0, 3).toUpperCase()}${i + 1}`,
       ticketName: ticketName,
       status,
       showMenu: false,
@@ -54,15 +54,12 @@ export class ReceiveOrderListComponent {
 
   // Toggle the dropdown menu
   toggleMenu(task: Task): void {
-    // If the menu is already open for the clicked task, close it
     if (task.showMenu) {
       task.showMenu = false;
     } else {
-      // Close all other menus first
       this.columns.forEach((column) => {
         column.tasks.forEach((t) => (t.showMenu = false));
       });
-      // Open the clicked task's menu
       task.showMenu = true;
     }
   }
@@ -90,13 +87,27 @@ export class ReceiveOrderListComponent {
         (col) => col.status === this.draggedItem!.status
       );
       const targetColumn = this.columns.find((col) => col.status === newStatus);
+
+      // Check if the movement is valid
       if (currentColumn && targetColumn) {
-        currentColumn.tasks = currentColumn.tasks.filter(
-          (item) => item.ticketId !== this.draggedItem!.ticketId
+        const canMove = this.canMoveTask(
+          currentColumn.status,
+          targetColumn.status
         );
-        targetColumn.tasks.push({ ...this.draggedItem, status: newStatus });
+        if (canMove) {
+          // Remove the task from the current column
+          currentColumn.tasks = currentColumn.tasks.filter(
+            (item) => item.ticketId !== this.draggedItem!.ticketId
+          );
+          // Add the task to the target column with the new status
+          targetColumn.tasks.push({ ...this.draggedItem, status: newStatus });
+        } else {
+          console.log(
+            `Cannot move task from ${currentColumn.name} to ${targetColumn.name}`
+          );
+        }
       }
-      this.draggedItem = null;
+      this.draggedItem = null; // Reset dragged item
     }
   }
 
@@ -110,5 +121,22 @@ export class ReceiveOrderListComponent {
       column.showingMore = !column.showingMore;
       column.displayCount = column.showingMore ? column.tasks.length : 10;
     }
+  }
+
+  // Check if a task can be moved from one status to another
+  canMoveTask(fromStatus: string, toStatus: string): boolean {
+    // Define valid transitions
+    const validTransitions: any = {
+      '1401': ['1301'], // Receive Order -> Preparing
+      '1301': ['1201'], // Preparing -> Ready To Pickup
+      '1201': ['1301', '1401'], // Ready To Pickup can go back to Preparing or Receive Order
+    };
+
+    // Allow backward movement without conditions
+    if (toStatus === '1401' || toStatus === '1301') {
+      return true; // Allow moving back to Receive Order or Preparing
+    }
+
+    return validTransitions[fromStatus]?.includes(toStatus) || false;
   }
 }
