@@ -1,6 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
+interface Task {
+  ticketId: string;
+  ticketName: string;
+  status: string;
+  showMenu?: boolean; // Optional property to track dropdown visibility
+}
+
 @Component({
   selector: 'app-receive-order-list',
   standalone: true,
@@ -9,97 +16,99 @@ import { Component } from '@angular/core';
   styleUrls: ['./receive-order-list.component.css'],
 })
 export class ReceiveOrderListComponent {
-  // Order lists for each stage
-  receivedOrders = [
-    '1402',
-    '1403',
-    '1404',
-    '1405',
-    '1406',
-    '1407',
-    '1408',
-    '1409',
-    '1410',
-    '1411',
-    '1302',
-    '1303',
-    '1304',
-    '1305',
-    '1306',
-    '1307',
-    '1308',
-    '1309',
-    '1310',
-    '1311',
+  draggedItem: Task | null = null;
+
+  columns = [
+    {
+      name: 'Receive Order',
+      status: 'Ordered',
+      tasks: this.generateTasks(12, 'Ordered', 'Items'),
+      displayCount: 10,
+      showingMore: false,
+    },
+    {
+      name: 'Preparing',
+      status: 'Booked',
+      tasks: this.generateTasks(11, 'Booked', 'Items'),
+      displayCount: 10,
+      showingMore: false,
+    },
+    {
+      name: 'Ready to Pickup',
+      status: 'Ready',
+      tasks: this.generateTasks(10, 'Ready', 'Items'),
+      displayCount: 10,
+      showingMore: false,
+    },
   ];
-  preparingOrders: string[] = [];
-  readyToPickupOrders: string[] = [];
 
-  // Active tab to display
-  activeTab: 'received' | 'preparing' | 'readyToPickup' = 'received';
-
-  // Control for showing items in each tab and toggle all items
-  itemsToShow: { received: number; preparing: number; readyToPickup: number } =
-    { received: 5, preparing: 5, readyToPickup: 5 };
-  showAllItems: {
-    received: boolean;
-    preparing: boolean;
-    readyToPickup: boolean;
-  } = { received: false, preparing: false, readyToPickup: false };
-
-  // Method to change the active tab
-  setActiveTab(tab: 'received' | 'preparing' | 'readyToPickup') {
-    this.activeTab = tab;
+  // Generate sample tasks
+  generateTasks(count: number, status: string, ticketName: string): Task[] {
+    return Array.from({ length: count }, (_, i) => ({
+      ticketId: `${status.slice(0, 3).toUpperCase()}-${i + 1}`,
+      ticketName: ticketName,
+      status,
+      showMenu: false,
+    }));
   }
 
-  // Method to toggle the number of items displayed in the table for the active tab
-  loadMore() {
-    if (this.showAllItems[this.activeTab]) {
-      this.itemsToShow[this.activeTab] = 5; // Reset to initial limit
+  // Toggle the dropdown menu
+  toggleMenu(task: Task): void {
+    // If the menu is already open for the clicked task, close it
+    if (task.showMenu) {
+      task.showMenu = false;
     } else {
-      this.itemsToShow[this.activeTab] = this.getOrdersList().length; // Show all items
+      // Close all other menus first
+      this.columns.forEach((column) => {
+        column.tasks.forEach((t) => (t.showMenu = false));
+      });
+      // Open the clicked task's menu
+      task.showMenu = true;
     }
-    this.showAllItems[this.activeTab] = !this.showAllItems[this.activeTab];
   }
 
-  // Helper to get the active orders list based on the active tab
-  getOrdersList() {
-    return this.activeTab === 'received'
-      ? this.receivedOrders
-      : this.activeTab === 'preparing'
-      ? this.preparingOrders
-      : this.readyToPickupOrders;
+  // View task action
+  viewTask(task: Task): void {
+    console.log('Viewing task:', task);
   }
 
-  // Move order to "Preparing" stage from "Received"
-  moveToPreparing(orderNo: string) {
-    this.receivedOrders = this.receivedOrders.filter(
-      (order) => order !== orderNo
-    );
-    this.preparingOrders.push(orderNo);
+  // Delete task action
+  deleteTask(task: Task, column: any): void {
+    column.tasks = column.tasks.filter((t: Task) => t !== task);
   }
 
-  // Move order to "Ready to Pickup" stage from "Preparing"
-  moveToReadyToPickup(orderNo: string) {
-    this.preparingOrders = this.preparingOrders.filter(
-      (order) => order !== orderNo
-    );
-    this.readyToPickupOrders.push(orderNo);
+  // Handle drag start
+  onDragStart(task: Task): void {
+    this.draggedItem = task;
   }
 
-  // Move order back to "Received" from "Preparing"
-  moveToReceived(orderNo: string) {
-    this.preparingOrders = this.preparingOrders.filter(
-      (order) => order !== orderNo
-    );
-    this.receivedOrders.push(orderNo);
+  // Handle drop
+  onDrop(event: Event, newStatus: string): void {
+    event.preventDefault();
+    if (this.draggedItem) {
+      const currentColumn = this.columns.find(
+        (col) => col.status === this.draggedItem!.status
+      );
+      const targetColumn = this.columns.find((col) => col.status === newStatus);
+      if (currentColumn && targetColumn) {
+        currentColumn.tasks = currentColumn.tasks.filter(
+          (item) => item.ticketId !== this.draggedItem!.ticketId
+        );
+        targetColumn.tasks.push({ ...this.draggedItem, status: newStatus });
+      }
+      this.draggedItem = null;
+    }
   }
 
-  // Move order back to "Preparing" from "Ready to Pickup"
-  moveToPreparingFromReady(orderNo: string) {
-    this.readyToPickupOrders = this.readyToPickupOrders.filter(
-      (order) => order !== orderNo
-    );
-    this.preparingOrders.push(orderNo);
+  onDragOver(event: Event): void {
+    event.preventDefault();
+  }
+
+  toggleMoreLess(status: string): void {
+    const column = this.columns.find((col) => col.status === status);
+    if (column) {
+      column.showingMore = !column.showingMore;
+      column.displayCount = column.showingMore ? column.tasks.length : 10;
+    }
   }
 }
