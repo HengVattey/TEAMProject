@@ -1,0 +1,75 @@
+
+
+
+<body>
+  <div class="container bg-light mt-5">
+    <h1 class="text-center">Receive Order List</h1>
+    <label for="" >From Date</label>
+    <input type="date" >
+
+    <label for="">To Date</label>
+    <input type="date">
+
+    <br>
+    <label for="">Store</label>
+    <input type="text" class="form-control">
+
+   
+<div class="float-end mt-5">
+  
+  <input  type="text" class="m-3 form-control">
+  <button class="btn btn-primary float-end">
+    Search
+  </button>
+
+</div>
+
+<pre>
+
+
+
+</pre>
+<table class="order-table">
+  <thead>
+    <tr>
+      <th>Order Number</th>
+      <th>Customer Name</th>
+      <th>Order Date</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.orderNumber }}</td>
+      <td>{{ order.customerName }}</td>
+      <td>{{ order.orderDate | date }}</td>
+      <td>{{ order.amount | currency }}</td>
+      <td>{{ order.status }}</td>
+      <td>
+        <button (click)="viewOrderDetails(order)">View</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="selectedOrder" class="order-details">
+  <h2>Order Details</h2>
+  <p><strong>Order Number:</strong> {{ selectedOrder.orderNumber }}</p>
+  <p><strong>Customer Name:</strong> {{ selectedOrder.customerName }}</p>
+  <p><strong>Order Date:</strong> {{ selectedOrder.orderDate | date }}</p>
+  <p><strong>Amount:</strong> {{ selectedOrder.amount | currency }}</p>
+  <p><strong>Status:</strong> {{ selectedOrder.status }}</p>
+  <button (click)="closeOrderDetails()">Close</button>
+</div>
+
+  </div>
+
+
+
+
+
+
+
+</body>

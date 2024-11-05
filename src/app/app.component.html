@@ -1,20 +1,64 @@
+<!-- <app-v-last> </app-v-last> -->
+<!-- <app-v-last> </app-v-last>  -->
 <!-- Vattey  -->
-<app-filter-table></app-filter-table>
-<!-- <app-receive-oder-list></app-receive-oder-list>
-<app-reject-order></app-reject-order> -->
+<!-- <app-reject-order></app-reject-order> -->
+ <!-- <app-receive-oder-list></app-receive-oder-list> -->
+ <!-- <app-v-last> </app-v-last> -->
+<!-- <app-reject-order></app-reject-order>  -->
 <!-- =====> End  -->
 
 <!-- LivAn -->
-<<<<<<< HEAD
 <!-- <app-receive-order-list></app-receive-order-list>
 <app-pickup-component></app-pickup-component>
 <app-order-detail></app-order-detail>  -->
-=======
-<!-- <app-receive-order-list></app-receive-order-list> -->
-<app-pickup-component></app-pickup-component>
-<!-- <app-order-detail></app-order-detail> -->
->>>>>>> 394ffbd40c188beb1fb3e36184144b2897d5bb7f
 <!-- Ends LivAn -->
 
 <!-- <app-return></app-return>
 <app-return-order-list></app-return-order-list> -->
+<!-- <app-pickup-component></app-pickup-component> -->
+<!-- <app-return></app-return> -->
+<!-- <app-return-order-list></app-return-order-list> -->
+
+<div class="offcanvas offcanvas-end w-25 bg" id="demo">
+  <div class="offcanvas-header">
+    <h1 class="offcanvas-title">Heading</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <a class="text-decoration-none fs-5 text-dark-emphasis"  routerLink="Livan"  routerLinkActive=" active ">ReceiveOrderList </a>
+    <br>
+    <a class="text-decoration-none fs-5 text-dark-emphasis" routerLink="Vattey"  routerLinkActive=" active">OrderDetetail</a>
+    <br>
+    <a class="text-decoration-none fs-5 text-dark-emphasis " routerLink="Pickup"  routerLinkActive=" active">Pickup</a>
+    <br>
+    <a class="text-decoration-none fs-5 text-dark-emphasis " routerLink="ReceiveOrderList1"  routerLinkActive=" active">ReceiveOrderList</a>
+    <br>
+    <a class="text-decoration-none fs-5 text-dark-emphasis  " routerLink="OrderDetail"  routerLinkActive=" active">OrderDetail</a>
+    <br>
+    <a class="text-decoration-none fs-5 text-dark-emphasis " routerLink="RejectOrder"  routerLinkActive=" active">RejectOrder</a>
+    <br>
+    <a href=""  class="text-decoration-none fs-5 text-dark-emphasis " routerLink="Return"  routerLinkActive=" active">Return</a>
+    <br>
+    <a href=""  class="text-decoration-none fs-5 text-dark-emphasis " routerLink="ReturnOrderList"  routerLinkActive=" active">ReturnOrderList</a>
+    <br>
+    <a href=""  class="text-decoration-none fs-5 text-dark-emphasis " routerLink="#"  routerLinkActive=" active">RefundList</a>
+    <br>
+  
+    <!-- <button class="btn btn-secondary" type="button">A Button</button> -->
+  </div>
+</div>
+
+<div class="container-fluid mt-3">
+  
+  <h3>Offcanvas Sidebar</h3>
+  <p>Offcanvas is similar to modals, except that it is often used as a sidebar.</p>
+  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+    Open Offcanvas Sidebar
+  </button>
+  <!-- <app-receive-order-list></app-receive-order-list> -->
+</div>
+
+<router-outlet> </router-outlet>
+
+
+
