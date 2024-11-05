@@ -1,8 +1,18 @@
 <div class="pickup-container">
-  <h3>Pickup Information</h3>
+  <h1>Pickup</h1>
 
-  <!-- First Table: Order and Receiver Information -->
-  <div class="table">
+  <!-- Verification Success Message Display -->
+  <div *ngIf="verificationMessage" class="verification-message">
+    <h1>{{ verificationMessage }}</h1>
+  </div>
+
+  <!-- Success Message Display -->
+  <div *ngIf="confirmationMessage" class="confirmation-message">
+    <h1>{{ confirmationMessage }}</h1>
+  </div>
+
+  <!-- Order and Receiver Information Form -->
+  <div *ngIf="!showItemFields && !pickupSuccessful" class="table">
     <div class="row">
       <label>Order Number</label>
       <input
@@ -27,40 +37,45 @@
         placeholder="Enter Receiver ID"
       />
     </div>
+
+    <!-- Buttons for Verifying and Accepting the Pickup -->
     <div class="row buttons">
       <button (click)="verifyReceiver()">Verify</button>
       <button (click)="openAcceptPopup()">Accept</button>
     </div>
   </div>
 
-  <!-- Accept Confirmation Popup as a Table -->
+  <!-- Accept Confirmation Popup -->
   <div *ngIf="showAcceptPopup" class="popup">
-    <h4>Confirm Order Acceptance</h4>
-    <div class="table">
-      <div class="row">
-        <label>Receiver Name</label>
-        <span>{{ receiverName }}</span>
-      </div>
-      <div class="row">
-        <label>Receiver ID</label>
-        <span>{{ receiverId }}</span>
-      </div>
-      <div class="row buttons">
-        <button (click)="confirmAcceptance()">Confirm</button>
-        <button (click)="closeAcceptPopup()">Cancel</button>
-      </div>
+    <h4>Accepting...</h4>
+    <p>Items are being prepared for pickup.</p>
+    <div class="row buttons">
+      <button (click)="confirmAcceptance()">Confirm</button>
+      <button (click)="closeAcceptPopup()">Cancel</button>
     </div>
   </div>
 
-  <!-- Second Table: Item Details (Shown after Confirmation) -->
-  <div *ngIf="showItemFields" class="table">
+  <!-- Order Items Display -->
+  <div *ngIf="showItemFields" class="items-list">
     <h4>Order Items</h4>
-    <div class="item-row" *ngFor="let item of items; index as i">
-      <label>Name</label>
-      <input type="text" [(ngModel)]="item.name" placeholder="Item Name" />
+    <div class="item-row" *ngFor="let item of items">
+      <div class="item-image">Image</div>
+      <div class="item-info">
+        <p><strong>Name:</strong> {{ item.name }}</p>
+        <p><strong>Quantity:</strong> {{ item.quantity }}</p>
+      </div>
+    </div>
 
-      <label>Quantity</label>
-      <input type="number" [(ngModel)]="item.quantity" placeholder="Quantity" />
+    <!-- Confirmation Details -->
+    <div class="confirmation-details">
+      <p><strong>Receiver Name:</strong> {{ receiverName }}</p>
+      <p><strong>Receiver ID:</strong> {{ receiverId }}</p>
+    </div>
+
+    <!-- Buttons for Confirming and Cancelling All Items -->
+    <div class="row buttons">
+      <button (click)="confirmAllItems()">Confirm All</button>
+      <button (click)="cancelAllItems()">Cancel All</button>
     </div>
   </div>
 </div>
