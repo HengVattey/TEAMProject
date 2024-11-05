@@ -1,0 +1,105 @@
+<!-- <h2>Using Jquery in Angular</h2>
+
+
+<button  id="flip" >Click</button>
+
+
+<div id="panel" style="width: 200px; height: 200px; padding: 20px; background-color: aqua; ">
+  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Error praesentium dolores laudantium voluptatum sed dolorem sapiente iusto libero nesciunt? Perspiciatis, repudiandae. Quod recusandae quam numquam adipisci dicta modi repellat a?
+</div>
+
+=====> -->
+
+<body>
+  <!-- <Head> </Head>
+
+
+    <h1 style="color:green">GeeksforGeeks</h1> 
+    <h2>Jquery in Angular</h2> 
+    <button>click me </button> 
+      <p id="result"></p>
+    <button class="hi">Hi</button>
+   <input type="text" id="fromInput">
+
+  <p>===========================></p>
+
+<p class="p">Welcome : </p>
+
+<ol>
+  <li>list1</li>
+  <li>list2</li>
+  <li>list3</li>
+</ol>
+
+<button id="btn1">Append text</button>
+<button id="btn2">Append list items</button>
+
+<p>===============================></p>
+
+<div class="container">
+<div class="form-row">
+<div class="col-m">
+
+  <input type="text" class="form-control " placeholder="Name" id="txtName">
+  <input type="text" class="form-control " placeholder=" Contact No" id="txtName">
+</div>
+</div>
+
+</div> -->
+
+  <div class="kanban-container">
+    <!-- Column for To Do -->
+    <div class="kanban-column" id="todo" >
+      <h2>To Do</h2>
+      <div class="task-card" *ngFor= "let item of filterTickets('To Do')" >
+        <p> {{item.ticketName}} </p>
+      </div>
+ 
+    </div>
+
+    <!-- Column for In Progress -->
+    <div class="kanban-column" id="in-progress">
+      <h2>In Progress</h2>
+      <div class="task-card"  *ngFor="let item of filterTickets('In progress')"  >
+        <p> {{ item.ticketId}} </p>
+      </div>
+    </div>
+
+    <!-- Column for Done -->
+    <div class="kanban-column" id="done">
+      <h2>Done</h2>
+      <div class="task-card" *ngFor="let item of filterTickets('Done')"  >
+        <p>{{ item.ticketId}} </p>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+
+  <table class="order-table">
+    <thead>
+      <tr>
+        <th>Order Number</th>
+        <th>Customer Name</th>
+        <th>Order Date</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of filteredOrders">
+        </tr>
+      <tr *ngIf="filteredOrders.length === 0">
+        <td colspan="6">No orders found.</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+  
+  
+</body>

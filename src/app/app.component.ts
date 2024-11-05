@@ -7,6 +7,7 @@ import { ReturnComponent } from './return/return.component';
 import { ReceiveOrderListComponent } from './receive-order-list/receive-order-list.component';
 import { PickupComponentComponent } from "./pickup-component/pickup-component.component";
 import { ReturnOrderListComponent } from "./return-order-list/return-order-list.component";
+import { FilterTAbleComponent } from './filter-table/filter-table.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ import { ReturnOrderListComponent } from "./return-order-list/return-order-list.
     ReceiveOderListComponent,
     OrderDetailComponent,
     REjectOrderComponent,
-    ReceiveOrderListComponent, PickupComponentComponent, ReturnOrderListComponent],
+    ReceiveOrderListComponent, PickupComponentComponent, ReturnOrderListComponent,FilterTAbleComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
