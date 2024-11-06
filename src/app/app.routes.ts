@@ -7,6 +7,7 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { REjectOrderComponent } from './reject-order/reject-order.component';
 import { ReturnComponent } from './return/return.component';
 import { ReturnOrderListComponent } from './return-order-list/return-order-list.component';
+import { RefunListComponent } from './refun-list/refun-list.component';
 
 export const routes: Routes = [
 {
@@ -46,6 +47,10 @@ export const routes: Routes = [
 {
   path:"ReturnOrderList",
   component: ReturnOrderListComponent
+},
+{
+  path:"RefundList",
+  component: RefunListComponent
 }
 
 
